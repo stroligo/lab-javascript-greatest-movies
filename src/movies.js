@@ -1,4 +1,4 @@
-// IMPORTAR 
+// Importar objeto  
 const moviesArray = require('./data.js')
 
 // Iteration 1: All directors? - Get the array of all directors.
@@ -18,7 +18,7 @@ function howManyMovies(moviesArray) {
   let filtered = moviesArray.filter(pointer => pointer.genre.includes("Drama")  && pointer.director === "Steven Spielberg" ).length;
   return filtered;
 }
-// console.log("Total de videos: " + howManyMovies(moviesArray)) 
+ //console.log("Total de videos: " + howManyMovies(moviesArray)) 
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(moviesArray) {
@@ -58,53 +58,52 @@ function orderAlphabetically(moviesArray) {
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes(moviesArray) {
-  const newArray = [];
-
+  const newArry = [];
   for (const movie of moviesArray) {
-
     const duration = movie.duration;
-    let hours = 0;
-    let minutes = 0;
+    let horas = 0;
+    let minutos = 0;
 
-    if (duration.includes("h")) {
-      hours = parseInt(duration.split(" ")[0].replace("h", "")) * 60;
-    }
-    if (duration.includes("min")) {
-      minutes = parseInt(duration.split(" ")[1].replace("min", ""));
-    }
+    if (duration.includes("h")) {horas = parseInt(duration.split(" ")[0].replace("h", "")) * 60;}
+    if (duration.includes("min")) {minutos = parseInt(duration.split(" ")[1].replace("min", ""));}
 
     let newMovie = {...movie}
-    newMovie.duration = hours + minutes;
-    newArray.push(newMovie);
+    newMovie.duration = horas + minutos;
+    newArry.push(newMovie);
   }
-  
-  return newArray;
+  return newArry;
 }
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {
   if (!moviesArray.length) return null
-
-  /** Filter all unique years */
   const uniqueYears = [...new Set(moviesArray.map(m => m.year))]
   const averageScoreByYear = []
-  
   for (let year of uniqueYears) {
-
-    const filteredMovies = moviesArray.filter(movie => movie.year === year)
-    
+    const filtered = moviesArray.filter(movie => movie.year === year)
     let avg = 0;
-    filteredMovies.forEach(movie => {avg += movie.score;})
-
-    let average = Math.round((avg / filteredMovies.length + Number.EPSILON) * 100) / 100
-
+    filtered.forEach(movie => {avg += movie.score;})
+    let average = Math.round((avg / filtered.length + Number.EPSILON) * 100) / 100
     averageScoreByYear.push({year, average});
   }
-
   let bestYear = averageScoreByYear.filter(el => el.average === Math.max(...averageScoreByYear.map(element => element.average)))
   if (bestYear.length > 1){
     bestYear = bestYear.filter(el => el.year === Math.min(...bestYear.map(element => element.year)))
   }
   bestYear = bestYear[0]
-  return `The best year was ${bestYear.year} with an average score of ${bestYear.average}`;
+  return `O melhor ano foi ${bestYear.year} com a media de score ${bestYear.average}`;
 }
+
+// Torna publico as funções 
+if (typeof module !== 'undefined') {
+  module.exports = {
+    getAllDirectors,
+    howManyMovies,
+    scoresAverage,
+    dramaMoviesScore,
+    orderByYear,
+    orderAlphabetically,
+    turnHoursToMinutes,
+    bestYearAvg,
+  };
+};

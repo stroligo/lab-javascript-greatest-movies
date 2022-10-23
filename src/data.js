@@ -2003,5 +2003,7 @@ const movies = [
   }
 ];
 
-// Exportar 
-module.exports = movies;
+// Torna publico o objeto 
+if (typeof module !== 'undefined') {
+  module.exports = movies;
+};
