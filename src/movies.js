@@ -1,10 +1,49 @@
+// IMPORTAR 
+const moviesArray = require('./data.js')
+
 // Iteration 1: All directors? - Get the array of all directors.
-// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
-// How could you "clean" a bit this array and make it unified (without duplicates)?
-function getAllDirectors(moviesArray) {}
+function getAllDirectors(moviesArray) {
+  return moviesArray.map(selector => selector.director );
+} 
+//console.log(getAllDirectors(moviesArray)) 
+
+// Bonus - Iteration 1.1: Clean the array of directors
+function getUniqueDirectors(moviesArray) {
+  return [...new Set(moviesArray.map(m => m.director))];
+}
+//console.log(getUniqueDirectors(moviesArray)) 
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
-function howManyMovies(moviesArray) {}
+function howManyMovies(moviesArray) {
+  // TODOS DIRETORES
+
+  const busca = 0; 
+  for (let i = 0; i < moviesArray.length; i++) {
+    if(moviesArray[i].director === "Steven Spielberg" ){ console.log(moviesArray[i].director);};
+
+
+    //console.log(moviesArray[i].genre[0]);
+
+    moviesArray[i].genre.forEach(element => console.log(element));
+ 
+    
+     for (let j = 0; j < moviesArray[i].genre[j]; j++) {
+      console.log(moviesArray[i].genre[j]);
+       if(moviesArray[j].genre === "Drama"){ console.log("drasad");};
+    } 
+
+
+    if(moviesArray[i].director === "Steven Spielberg" && moviesArray[i].genre === "Drama"){
+      busca += busca;
+    }
+  }
+  return busca;
+}
+
+/* function howManyMovies(moviesArray) {
+  return moviesArray.filter(m => m.genre.includes("Drama") && m.director === "Steven Spielberg").length;
+} */
+console.log(howManyMovies(moviesArray)) 
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(moviesArray) {}
