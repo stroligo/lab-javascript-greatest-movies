@@ -24,7 +24,7 @@ const movies = [
     genre: ['Crime', 'Drama'],
     score: 9
   },
-  {
+ {
     title: 'The Dark Knight',
     year: 2008,
     director: 'Christopher Nolan',
